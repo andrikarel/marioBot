@@ -44,9 +44,9 @@ class Control(object):
             self.flip_state()
 
 
-        l = list(self.keys)
-        l[keybinding["right"]] = 1
-        self.keys = tuple(l)
+       # l = list(self.keys)
+        #l[keybinding["right"]] = 1
+        #self.keys = tuple(l)
 
 
 
@@ -86,8 +86,6 @@ class Control(object):
             self.update()
             pg.display.update()
             self.clock.tick(self.fps)
-            if self.game_controller.level.started:
-                self.game_controller.printStuff()
             if self.show_fps:
                 fps = self.clock.get_fps()
                 with_fps = "{} - {:.2f} FPS".format(self.caption, fps)
