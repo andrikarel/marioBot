@@ -15,6 +15,7 @@ from .. components import flagpole
 from .. components import info
 from .. components import score
 from .. components import castle_flag
+from .. components import Agent
 
 class Level1(tools._State):
     def __init__(self):
@@ -80,6 +81,11 @@ class Level1(tools._State):
         ground_rect3 = collider.Collider(3819, c.GROUND_HEIGHT, 2735, 60)
         ground_rect4 = collider.Collider(6647, c.GROUND_HEIGHT, 2300, 60)
 
+        self.ground_list = [ground_rect1,
+                            ground_rect2,
+                            ground_rect3,
+                            ground_rect4]
+
         self.ground_group = pg.sprite.Group(ground_rect1,
                                            ground_rect2,
                                            ground_rect3,
@@ -96,9 +102,12 @@ class Level1(tools._State):
         pipe5 = collider.Collider(6989, 452, 83, 82)
         pipe6 = collider.Collider(7675, 452, 83, 82)
 
+        self.pipe_list = [pipe1, pipe2, pipe3, pipe4, pipe5, pipe6]
+
         self.pipe_group = pg.sprite.Group(pipe1, pipe2,
                                           pipe3, pipe4,
                                           pipe5, pipe6)
+        
 
 
     def setup_steps(self):
@@ -136,6 +145,21 @@ class Level1(tools._State):
         step26 = collider.Collider(8103, 194, 40, 360)
 
         step27 = collider.Collider(8488, 495, 40, 40)
+
+        self.step_list = [step1,  step2,
+                                          step3,  step4,
+                                          step5,  step6,
+                                          step7,  step8,
+                                          step9,  step10,
+                                          step11, step12,
+                                          step13, step14,
+                                          step15, step16,
+                                          step17, step18,
+                                          step19, step20,
+                                          step21, step22,
+                                          step23, step24,
+                                          step25, step26,
+                                          step27]
 
         self.step_group = pg.sprite.Group(step1,  step2,
                                           step3,  step4,
@@ -191,6 +215,23 @@ class Level1(tools._State):
         brick29 = bricks.Brick(7202, 365)
         brick30 = bricks.Brick(7245, 365)
         brick31 = bricks.Brick(7331, 365)
+
+        self.brick_list = [brick1,  brick2,
+                                           brick3,  brick4,
+                                           brick5,  brick6,
+                                           brick7,  brick8,
+                                           brick9,  brick10,
+                                           brick11, brick12,
+                                           brick13, brick14,
+                                           brick15, brick16,
+                                           brick17, brick18,
+                                           brick19, brick20,
+                                           brick21, brick22,
+                                           brick23, brick24,
+                                           brick25, brick26,
+                                           brick27, brick28,
+                                           brick29, brick30,
+                                           brick31]
 
         self.brick_group = pg.sprite.Group(brick1,  brick2,
                                            brick3,  brick4,
@@ -284,6 +325,8 @@ class Level1(tools._State):
         goomba15 = enemies.Goomba()
 
         koopa0 = enemies.Koopa()
+
+        self.enemies_group = [goomba0,goomba1,goomba2,goomba3,goomba4,goomba5,goomba6,goomba7,goomba8,goomba9,goomba10,goomba11,goomba12,goomba13,goomba14,goomba15,koopa0]
 
         enemy_group1 = pg.sprite.Group(goomba0)
         enemy_group2 = pg.sprite.Group(goomba1)

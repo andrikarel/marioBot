@@ -62,7 +62,7 @@ class Mario(pg.sprite.Sprite):
         self.max_x_vel = c.MAX_WALK_SPEED
         self.max_y_vel = c.MAX_Y_VEL
         self.x_accel = c.WALK_ACCEL
-        self.jump_vel = c.JUMP_VEL
+        self.jump_vel = c.JUMP_VEL 
         self.gravity = c.GRAVITY
 
 
@@ -634,7 +634,7 @@ class Mario(pg.sprite.Sprite):
         """Called when Mario is in a JUMP state."""
         self.allow_jump = False
         self.frame_index = 4
-        self.gravity = c.JUMP_GRAVITY
+        self.gravity = c.JUMP_GRAVITY/1.1
         self.y_vel += self.gravity
         self.check_to_allow_fireball(keys)
 

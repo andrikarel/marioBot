@@ -16,7 +16,7 @@ class Control(object):
     """Control class for entire project. Contains the game loop, and contains
     the event_loop which passes events to States as needed. Logic for flipping
     states is also found here."""
-    def __init__(self, caption, game_controller):
+    def __init__(self, caption, game_connector):
         self.screen = pg.display.get_surface()
         self.done = False
         self.clock = pg.time.Clock()
@@ -29,7 +29,7 @@ class Control(object):
         self.state_name = None
         self.state = None
         self.jumping = True
-        self.game_controller = game_controller
+        self.game_connector = game_connector
 
     def setup_states(self, state_dict, start_state):
         self.state_dict = state_dict
@@ -43,10 +43,7 @@ class Control(object):
         elif self.state.done:
             self.flip_state()
 
-
-       # l = list(self.keys)
-        #l[keybinding["right"]] = 1
-        #self.keys = tuple(l)
+        self.game_connector.executeInput(self)
 
 
 
@@ -86,6 +83,8 @@ class Control(object):
             self.update()
             pg.display.update()
             self.clock.tick(self.fps)
+            if self.game_connector.level.started:
+                self.game_connector.getEnemyPos()
             if self.show_fps:
                 fps = self.clock.get_fps()
                 with_fps = "{} - {:.2f} FPS".format(self.caption, fps)
