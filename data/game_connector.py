@@ -2,6 +2,7 @@ from .states import level1
 from .components import Agent
 import pygame as pg
 import datetime
+from _thread import *
 keybinding = {
     'action':pg.K_s,
     'jump':pg.K_a,
@@ -28,42 +29,85 @@ class GameConnector(object):
 				else:
 					self.enemys = enemy.rect.x
 					break
-	def pipePos(self):
+	def getPipePos(self):
 		self.agent.pipe_list = self.level.pipe_list
 
-	def getHole(self): #TODO: enter hole positions into agent
+	def getHolePos(self): #TODO: enter hole positions into agent
 		for groundBit in self.level.ground_list:
 			if((groundBit.rect.x + groundBit.width) != 0):
 				self.agent.hole_list.append(groundBit.rect.x + groundBit.width)
 
 
-	def makeMove(self):
+	def getStepPos(self):
+		self.agent.step_list = self.level.step_list
 
-		if self.agent.nextMove(self.level.mario.rect.x,self.enemys) == "right":
-			return "right"
-		else:
-			self.jumping = True
-			self.jumpTime = datetime.datetime.now().time().second
 
-			return "jump" 
+	#def makeMove(self):
+
+	#	if self.agent.nextMove(self.level.mario.rect.x,self.enemys) == "right":
+	#		return "right"
+	#	else:
+	#		self.jumping = True
+	#		self.jumpTime = datetime.datetime.now().time().second
+	#		try:
+	#			thread.start_new_thread(self.jumpTime)
+	#		except:
+	#			print("NOOOOOOOO")
+	#		return "jump" 
+
+
+	def jumpTime(self):
+		while(current - self.jumpTime) < 0.1:
+			pass
+		self.jumping = False
+		l = list(tools.keys)
+		l[keybinding["jump"]] = 0
+		tools.keys = tuple(l)
+
+
+	#def executeInput(self,tools):
+	#	current = datetime.datetime.now().time().second
+	#	if self.level.started:
+	#		if self.thingDone == False:
+	#			self.pipePos()
+	#			self.getHole()
+	#			self.getSteps()
+	#			self.thingDone = True
+	#		if self.jumping:
+	#			if (current - self.jumpTime) > 0.1:
+	#				self.jumping = False
+	#				l = list(tools.keys)
+	#				l[keybinding["jump"]] = 0
+	#				tools.keys = tuple(l)
+	#				
+	#		else:
+	#		    self.getEnemyPos()
+	#		    l = list(tools.keys)
+	#		    l[keybinding[self.makeMove()]] = 1
+	#		    tools.keys = tuple(l)
+
 
 
 	def executeInput(self,tools):
-		current = datetime.datetime.now().time().second
 		if self.level.started:
+			self.getEnemyPos()
 			if self.thingDone == False:
-				self.pipePos()
-				self.getHole()
+				self.getPipePos()
+				self.getHolePos()	
+				self.getStepPos()
 				self.thingDone = True
+			action = self.agent.nextMove(self.level.mario.rect.x,self.enemys)
+			current = datetime.datetime.now().second
 			if self.jumping:
-				if (current - self.jumpTime) > 0.1:
+				if (current - self.jumpTime) > 0.3:
 					self.jumping = False
 					l = list(tools.keys)
 					l[keybinding["jump"]] = 0
 					tools.keys = tuple(l)
-					
 			else:
-			    self.getEnemyPos()
-			    l = list(tools.keys)
-			    l[keybinding[self.makeMove()]] = 1
-			    tools.keys = tuple(l)
+				if action == "jump":
+					self.jumping = True
+					self.jumpTime = datetime.datetime.now().second
+				l = list(tools.keys)
+				l[keybinding[action]] = 1
+				tools.keys = tuple(l)

@@ -7,6 +7,7 @@ class Agent(object):
 		super(Agent, self).__init__()
 		self.pipe_list = []
 		self.hole_list = []
+		self.step_list = []
 
 
 	#def nextMove(self,marioPos,enemyPos,pipe,hole):
@@ -25,7 +26,7 @@ class Agent(object):
 
 
 	def nextMove(self,marioPos,enemyPos):
-		if self.enemyNear(marioPos, enemyPos) or self.pipeNear(marioPos) or self.holeNear(marioPos):
+		if self.enemyNear(marioPos, enemyPos) or self.pipeNear(marioPos) or self.holeNear(marioPos) or self.stepNear(marioPos):
 			return "jump"
 		return "right"
 
@@ -45,5 +46,12 @@ class Agent(object):
 		if self.hole_list:
 			if self.hole_list[0] - marioPos < 30:
 				self.hole_list.remove(self.hole_list[0])
-			elif self.hole_list[0] - marioPos < 150:
+			elif self.hole_list[0] - marioPos < 100:
+				return True
+
+	def stepNear(self, marioPos):
+		if self.step_list:
+			if self.step_list[0].rect.x - marioPos < 25:
+				self.step_list.remove(self.step_list[0])
+			elif self.step_list[0].rect.x - marioPos < 150:
 				return True
