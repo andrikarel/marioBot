@@ -16,6 +16,7 @@ class GameConnector(object):
 		self.agent = Agent.Agent()
 		self.enemys = 0
 		self.pipes = 0
+		self.hole = 0
 		self.jumping = False
 		self.jumpTime = datetime.datetime.now().time().second
 		
@@ -38,10 +39,17 @@ class GameConnector(object):
 					self.pipes = pipe.rect.x
 					break
 
+	def getHole(self):
+		for groundBit in self.level.ground_list:
+			if((groundBit.x + groundBit.width) != 0):
+				self.hole = (groundBit.x + groundBit.width)
+				print(self.hole)
+				break
+
 
 	def makeMove(self):
 
-		if self.agent.nextMove(self.level.mario.rect.x,self.enemys,self.pipes) == "right":
+		if self.agent.nextMove(self.level.mario.rect.x,self.enemys,self.pipes,self.hole) == "right":
 			return "right"
 		else:
 			self.jumping = True
