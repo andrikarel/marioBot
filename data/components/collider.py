@@ -14,4 +14,5 @@ class Collider(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.state = None
+        self.width = width
 

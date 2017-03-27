@@ -15,10 +15,9 @@ class GameConnector(object):
 		self.level = level
 		self.agent = Agent.Agent()
 		self.enemys = 0
-		self.pipes = 0
-		self.hole = 0
 		self.jumping = False
 		self.jumpTime = datetime.datetime.now().time().second
+		self.thingDone = False
 		
 
 	def getEnemyPos(self):
@@ -30,26 +29,17 @@ class GameConnector(object):
 					self.enemys = enemy.rect.x
 					break
 	def pipePos(self):
-		for pipe in self.level.pipe_list:
-			if(pipe.rect.x != 0):
-				if(pipe.rect.x - self.level.mario.rect.x < -20):
-					self.level.pipe_list.remove(pipe)
-				else:
+		self.agent.pipe_list = self.level.pipe_list
 
-					self.pipes = pipe.rect.x
-					break
-
-	def getHole(self):
+	def getHole(self): #TODO: enter hole positions into agent
 		for groundBit in self.level.ground_list:
-			if((groundBit.x + groundBit.width) != 0):
-				self.hole = (groundBit.x + groundBit.width)
-				print(self.hole)
-				break
+			if((groundBit.rect.x + groundBit.width) != 0):
+				self.agent.hole_list.append(groundBit.rect.x + groundBit.width)
 
 
 	def makeMove(self):
 
-		if self.agent.nextMove(self.level.mario.rect.x,self.enemys,self.pipes,self.hole) == "right":
+		if self.agent.nextMove(self.level.mario.rect.x,self.enemys) == "right":
 			return "right"
 		else:
 			self.jumping = True
@@ -61,6 +51,10 @@ class GameConnector(object):
 	def executeInput(self,tools):
 		current = datetime.datetime.now().time().second
 		if self.level.started:
+			if self.thingDone == False:
+				self.pipePos()
+				self.getHole()
+				self.thingDone = True
 			if self.jumping:
 				if (current - self.jumpTime) > 0.1:
 					self.jumping = False
@@ -70,7 +64,6 @@ class GameConnector(object):
 					
 			else:
 			    self.getEnemyPos()
-			    self.pipePos()
 			    l = list(tools.keys)
 			    l[keybinding[self.makeMove()]] = 1
 			    tools.keys = tuple(l)
