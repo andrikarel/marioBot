@@ -12,6 +12,8 @@ class AStarAgent(object):
 		self.jumpIntensity = 0
 		self.legalMoves = 0
 		self.move = 0
+		self.groundY = 498
+		self.maxJumpY = 162
 
 
 	def posPrediction(self):
@@ -19,13 +21,43 @@ class AStarAgent(object):
 
 
 
-	def nextMove(self):
+	def nextMove(self, enemies, mario):
 		self.legalMoves = self.getLegalMoves()
 		self.move = self.aStar()
-		return "right"
+		return "jump"
 
 	def getLegalMoves(self):
 		return 0
 
 	def aStar(self):
 		return 0
+
+
+
+# if keys[tools.keybinding['jump']]:
+#             if self.allow_jump:
+#                 if self.big:
+#                     #setup.SFX['big_jump'].play()
+#                 else:
+#                     #setup.SFX['small_jump'].play()
+#                 self.state = c.JUMP
+#                 if self.x_vel > 4.5 or self.x_vel < -4.5:
+#                     self.y_vel = c.JUMP_VEL - .5
+#                 else:
+#                     self.y_vel = c.JUMP_VEL
+
+# elif keys[tools.keybinding['right']]:
+#             self.get_out_of_crouch()
+#             self.facing_right = True
+#             if self.x_vel < 0:
+#                 self.frame_index = 5
+#                 self.x_accel = c.SMALL_TURNAROUND
+#             else:
+#                 self.x_accel = c.WALK_ACCEL
+
+#             if self.x_vel < self.max_x_vel:
+#                 self.x_vel += self.x_accel
+#                 if self.x_vel < 0.5:
+#                     self.x_vel = 0.5
+#             elif self.x_vel > self.max_x_vel:
+#                 self.x_vel -= self.x_accel

@@ -1505,7 +1505,7 @@ class No_enemies_level(tools._State):
 
         self.moving_score_list = []
         self.overhead_info_display = info.OverheadInfo(self.game_info, c.LEVEL)
-        self.sound_manager = game_sound.Sound(self.overhead_info_display)
+        #self.sound_manager = game_sound.Sound(self.overhead_info_display)
 
         self.setup_background()
         self.setup_ground()
@@ -1828,7 +1828,7 @@ class No_enemies_level(tools._State):
         self.handle_states(keys)
         self.check_if_time_out()
         self.blit_everything(surface)
-        self.sound_manager.update(self.game_info, self.mario)
+        #self.sound_manager.update(self.game_info, self.mario)
 
 
 
@@ -2877,7 +2877,7 @@ class No_enemies_level(tools._State):
         elif (self.current_time - self.flag_timer) > 2000:
             self.set_game_info_values()
             self.next = c.GAME_OVER
-            self.sound_manager.stop_music()
+            #self.sound_manager.stop_music()
             self.done = True
 
 

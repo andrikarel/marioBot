@@ -12,7 +12,7 @@ def main():
                   c.LOAD_SCREEN: load_screen.LoadScreen(),
                   c.TIME_OUT: load_screen.TimeOut(),
                   c.GAME_OVER: load_screen.GameOver(),
-                  c.LEVEL1: level1.Level1()}
+                  c.LEVEL1: level1.No_enemies_level()}
     
     gc = game_connector.GameConnector(state_dict[c.LEVEL1])
 
