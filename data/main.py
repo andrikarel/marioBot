@@ -4,7 +4,7 @@ from . import setup,tools
 from .states import main_menu,load_screen,level1
 from . import constants as c
 from . import game_connector 
-from .components import Agent
+from .components import ReflexAgent
 
 def main():
     """Add states to control here."""

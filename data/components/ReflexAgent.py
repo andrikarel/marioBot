@@ -1,29 +1,13 @@
 import random
 from . import mario
 
-class Agent(object):
+class ReflexAgent(object):
 	"""docstring for Agent"""
 	def __init__(self):
-		super(Agent, self).__init__()
+		super(ReflexAgent, self).__init__()
 		self.pipe_list = []
 		self.hole_list = []
 		self.step_list = []
-
-
-	#def nextMove(self,marioPos,enemyPos,pipe,hole):
-	#	if enemyPos != 0:
-	#		if ((enemyPos - marioPos < 100) and (marioPos - enemyPos < 30)):
-	#			return "jump"
-	#		elif (pipe - marioPos == 30):
-	#			return "jump"
-	#		elif (hole - marioPos < 10):
-	#			return "jump"
-	#	elif (pipe - marioPos < 50):
-	#		return "jump"
-	#	elif (pipe - marioPos < 10):
-	#		return "jump"
-	#	return "right"
-
 
 	def nextMove(self,marioPos,enemyPos):
 		if self.enemyNear(marioPos, enemyPos) or self.pipeNear(marioPos) or self.holeNear(marioPos) or self.stepNear(marioPos):

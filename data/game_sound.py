@@ -36,6 +36,7 @@ class Sound(object):
 
     def  handle_state(self):
         """Handles the state of the soundn object"""
+        return
         if self.state == c.NORMAL:
             if self.mario.dead:
                 self.play_music('death', c.MARIO_DEAD)

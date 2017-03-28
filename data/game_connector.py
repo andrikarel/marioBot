@@ -1,5 +1,6 @@
 from .states import level1
-from .components import Agent
+from .components import ReflexAgent
+from .components import AStarAgent
 import pygame as pg
 import datetime
 keybinding = {
@@ -13,7 +14,7 @@ keybinding = {
 class GameConnector(object):
 	def __init__(self,level):
 		self.level = level
-		self.agent = Agent.Agent()
+		self.agent = AStarAgent.AStarAgent()
 		self.enemys = 0
 		self.jumping = False
 		self.jumpCounter = 0
@@ -44,11 +45,12 @@ class GameConnector(object):
 		if self.level.started:
 			self.getEnemyPos()
 			if self.hazardsLogged == False:
+				self.agent.mario = self.level.mario
 				self.getPipePos()
 				self.getHolePos()	
 				self.getStepPos()
 				self.hazardsLogged = True
-			action = self.agent.nextMove(self.level.mario.rect.x,self.enemys)
+			action = self.agent.nextMove()
 			current = datetime.datetime.now().second
 			if self.jumping:
 				if self.jumpCounter >= 25:
