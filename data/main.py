@@ -1,7 +1,7 @@
 __author__ = 'justinarmstrong'
 
 from . import setup,tools
-from .states import main_menu,load_screen,level2
+from .states import main_menu,load_screen,level1
 from . import constants as c
 from . import game_connector 
 from .components import Agent
@@ -12,7 +12,7 @@ def main():
                   c.LOAD_SCREEN: load_screen.LoadScreen(),
                   c.TIME_OUT: load_screen.TimeOut(),
                   c.GAME_OVER: load_screen.GameOver(),
-                  c.LEVEL1: level2.Level2()}
+                  c.LEVEL1: level1.Level1()}
     
     gc = game_connector.GameConnector(state_dict[c.LEVEL1])
 

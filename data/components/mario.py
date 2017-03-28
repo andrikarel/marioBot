@@ -634,7 +634,7 @@ class Mario(pg.sprite.Sprite):
         """Called when Mario is in a JUMP state."""
         self.allow_jump = False
         self.frame_index = 4
-        self.gravity = c.JUMP_GRAVITY/1.1
+        self.gravity = c.JUMP_GRAVITY
         self.y_vel += self.gravity
         self.check_to_allow_fireball(keys)
 
