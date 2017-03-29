@@ -1,7 +1,20 @@
 from . import mario
-
+from simpleai.search import SearchProblem, astar
+from . import state
+from .. import constants as c
 class AStarAgent(object):
 	"""docstring for Agent"""
+	class HelloProblem(SearchProblem):
+		def actions(self, state):
+			return state.legalMoves()
+		def result(self, state, action):
+			return state.successorState(action)
+		def is_goal(self, state):
+			return state.isGoal()
+		def heuristic(self, state):
+			if state.yStart > c.GROUND_HEIGHT:
+				return 500000
+			return 8550-state.xStart
 	def __init__(self):
 		super(AStarAgent, self).__init__()
 		self.pipe_list = []
@@ -12,12 +25,13 @@ class AStarAgent(object):
 		self.groundY = 498
 		self.maxJumpY = 162
 
-
 	def posPrediction(self):
 		pass
 
 	def nextMove(self, enemies, mario):
-		self.move = self.aStar()
+		problem = self.HelloProblem(initial_state=state.State(mario.rect.x, mario.rect.y, enemies, self.pipe_list,self.hole_list,self.step_list,0))
+		result = astar(problem)
+		self.move = result.path()[1][0]
 		return self.move
 
 	def aStar(self):
@@ -25,6 +39,12 @@ class AStarAgent(object):
 
 	def goalState(self, state):
 		return False
+
+
+
+
+
+
 
 
 

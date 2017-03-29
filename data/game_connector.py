@@ -52,7 +52,6 @@ class GameConnector(object):
 			action = self.agent.nextMove(self.enemys, self.level.mario)
 			current = datetime.datetime.now().second
 			if self.jumping:
-				print(self.level.mario.rect.x)
 				if self.jumpCounter >= 25:
 					self.jumping = False
 					l = list(tools.keys)
