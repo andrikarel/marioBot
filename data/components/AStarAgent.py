@@ -7,10 +7,7 @@ class AStarAgent(object):
 		self.pipe_list = []
 		self.hole_list = []
 		self.step_list = []
-		self.xPos = 0
-		self.yPos = 0
 		self.jumpIntensity = 0
-		self.legalMoves = 0
 		self.move = 0
 		self.groundY = 498
 		self.maxJumpY = 162
@@ -19,18 +16,15 @@ class AStarAgent(object):
 	def posPrediction(self):
 		pass
 
-
-
 	def nextMove(self, enemies, mario):
-		self.legalMoves = self.getLegalMoves()
 		self.move = self.aStar()
-		return "jump"
-
-	def getLegalMoves(self):
-		return 0
+		return self.move
 
 	def aStar(self):
 		return 0
+
+	def goalState(self, state):
+		return False
 
 
 

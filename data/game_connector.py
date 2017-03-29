@@ -43,7 +43,6 @@ class GameConnector(object):
 
 	def executeInput(self,tools):
 		if self.level.started:
-			print(self.level.mario.rect.y)
 			self.getEnemyPos()
 			if self.hazardsLogged == False:
 				self.getPipePos()
@@ -53,8 +52,8 @@ class GameConnector(object):
 			action = self.agent.nextMove(self.enemys, self.level.mario)
 			current = datetime.datetime.now().second
 			if self.jumping:
+				print(self.level.mario.rect.x)
 				if self.jumpCounter >= 25:
-					print("Im not jumping")
 					self.jumping = False
 					l = list(tools.keys)
 					l[keybinding["jump"]] = 0

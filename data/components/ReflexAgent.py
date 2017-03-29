@@ -9,7 +9,8 @@ class ReflexAgent(object):
 		self.hole_list = []
 		self.step_list = []
 
-	def nextMove(self,marioPos,enemyPos):
+	def nextMove(self,enemyPos,mario):
+		marioPos = mario.rect.x
 		if self.enemyNear(marioPos, enemyPos) or self.pipeNear(marioPos) or self.holeNear(marioPos) or self.stepNear(marioPos):
 			return "jump"
 		return "right"
