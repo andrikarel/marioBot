@@ -29,7 +29,7 @@ class AStarAgent(object):
 		pass
 
 	def nextMove(self, enemies, mario):
-		problem = self.HelloProblem(initial_state=state.State(mario.rect.x, mario.rect.y, enemies, self.pipe_list,self.hole_list,self.step_list,0))
+		problem = self.HelloProblem(initial_state=state.State(mario.rect.x, mario.rect.y, mario.y_vel, mario.state,enemies, self.pipe_list,self.hole_list,self.step_list,0))
 		result = astar(problem)
 		self.move = result.path()[1][0]
 		return self.move

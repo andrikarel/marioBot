@@ -15,20 +15,14 @@ class GameConnector(object):
 	def __init__(self,level):
 		self.level = level
 		self.agent = AStarAgent.AStarAgent()
-		self.enemys = 0
+		self.enemys = []
 		self.jumping = False
 		self.jumpCounter = 0
 		self.hazardsLogged = False
 		
 
 	def getEnemyPos(self):
-		for enemy in self.level.enemies_group:
-			if(enemy.rect.x != 0):
-				if(enemy.rect.x - self.level.mario.rect.x < -20):
-					self.level.enemies_group.remove(enemy)
-				else:
-					self.enemys = enemy.rect.x
-					break
+		self.enemys = self.level.enemies_group
 	def getPipePos(self):
 		self.agent.pipe_list = self.level.pipe_list
 
@@ -50,7 +44,6 @@ class GameConnector(object):
 				self.getStepPos()
 				self.hazardsLogged = True
 			action = self.agent.nextMove(self.enemys, self.level.mario)
-			current = datetime.datetime.now().second
 			if self.jumping:
 				if self.jumpCounter >= 25:
 					self.jumping = False
